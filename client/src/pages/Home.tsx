@@ -46,7 +46,7 @@ export default function Home() {
             <div className="space-y-8">
               <div className="inline-flex items-center gap-2 border border-border px-3 py-1 bg-background/50 backdrop-blur-sm">
                 <span className="w-2 h-2 bg-accent"></span>
-                <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">DevOps Architects for Scale</span>
+                <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">RevOps Architects for Scale</span>
               </div>
               
               <h1 className="font-heading text-5xl md:text-7xl font-bold leading-[0.9] tracking-tight text-primary">
