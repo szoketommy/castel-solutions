@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowRight, BarChart3, Layers, Ruler, Settings, Zap, MousePointer2 } from "lucide-react";
+import { ArrowRight, BarChart3, Layers, Ruler, Settings, Zap, MousePointer2, Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 export default function Home() {
   const [activeHotspot, setActiveHotspot] = useState<string | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
@@ -43,10 +44,36 @@ export default function Home() {
             ))}
           </nav>
           
-          <Button variant="outline" className="rounded-none border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-mono text-xs uppercase tracking-widest">
-            Book Audit
-          </Button>
+          <div className="hidden md:block">
+            <Button variant="outline" className="rounded-none border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-mono text-xs uppercase tracking-widest">
+              Book Audit
+            </Button>
+          </div>
+
+          {/* Mobile Menu Toggle */}
+          <button className="md:hidden p-2" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
+
+        {/* Mobile Navigation Overlay */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden absolute top-16 left-0 w-full bg-background border-b border-border p-6 flex flex-col gap-6 animate-in slide-in-from-top-5">
+            {["Philosophy", "Services", "Approach", "Contact"].map((item) => (
+              <a 
+                key={item} 
+                href={`#${item.toLowerCase()}`} 
+                className="text-lg font-medium hover:text-primary transition-colors uppercase tracking-wider"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {item}
+              </a>
+            ))}
+            <Button className="w-full rounded-none bg-primary text-primary-foreground font-mono text-xs uppercase tracking-widest h-12">
+              Book Audit
+            </Button>
+          </div>
+        )}
       </header>
 
       <main className="flex-1 pt-16">
@@ -110,14 +137,15 @@ export default function Home() {
                   className="w-full h-full object-contain mix-blend-multiply opacity-90"
                 />
                 
-                {/* Interactive Hotspots */}
+                {/* Interactive Hotspots - Tap supported */}
                 <div 
                   className="absolute top-[35%] left-[45%] w-24 h-24 cursor-pointer z-20 group/hotspot"
                   onMouseEnter={() => setActiveHotspot("foundation")}
                   onMouseLeave={() => setActiveHotspot(null)}
+                  onClick={() => setActiveHotspot(activeHotspot === "foundation" ? null : "foundation")}
                 >
-                  <div className="absolute inset-0 border border-primary/0 group-hover/hotspot:border-primary/50 rounded-full transition-all duration-300 animate-pulse-slow"></div>
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full bg-primary text-primary-foreground text-[10px] px-2 py-1 opacity-0 group-hover/hotspot:opacity-100 transition-opacity whitespace-nowrap font-mono uppercase tracking-wider">
+                  <div className={`absolute inset-0 border rounded-full transition-all duration-300 animate-pulse-slow ${activeHotspot === "foundation" ? "border-primary bg-primary/10" : "border-primary/0 group-hover/hotspot:border-primary/50"}`}></div>
+                  <div className={`absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full bg-primary text-primary-foreground text-[10px] px-2 py-1 transition-opacity whitespace-nowrap font-mono uppercase tracking-wider ${activeHotspot === "foundation" ? "opacity-100" : "opacity-0 group-hover/hotspot:opacity-100"}`}>
                     Foundation: System Audit
                   </div>
                 </div>
@@ -126,9 +154,10 @@ export default function Home() {
                   className="absolute top-[15%] right-[30%] w-20 h-20 cursor-pointer z-20 group/hotspot"
                   onMouseEnter={() => setActiveHotspot("structure")}
                   onMouseLeave={() => setActiveHotspot(null)}
+                  onClick={() => setActiveHotspot(activeHotspot === "structure" ? null : "structure")}
                 >
-                  <div className="absolute inset-0 border border-primary/0 group-hover/hotspot:border-primary/50 rounded-full transition-all duration-300 animate-pulse-slow"></div>
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full bg-primary text-primary-foreground text-[10px] px-2 py-1 opacity-0 group-hover/hotspot:opacity-100 transition-opacity whitespace-nowrap font-mono uppercase tracking-wider">
+                  <div className={`absolute inset-0 border rounded-full transition-all duration-300 animate-pulse-slow ${activeHotspot === "structure" ? "border-primary bg-primary/10" : "border-primary/0 group-hover/hotspot:border-primary/50"}`}></div>
+                  <div className={`absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full bg-primary text-primary-foreground text-[10px] px-2 py-1 transition-opacity whitespace-nowrap font-mono uppercase tracking-wider ${activeHotspot === "structure" ? "opacity-100" : "opacity-0 group-hover/hotspot:opacity-100"}`}>
                     Structure: Process Engineering
                   </div>
                 </div>
@@ -137,9 +166,10 @@ export default function Home() {
                   className="absolute bottom-[20%] left-[20%] w-28 h-16 cursor-pointer z-20 group/hotspot"
                   onMouseEnter={() => setActiveHotspot("scale")}
                   onMouseLeave={() => setActiveHotspot(null)}
+                  onClick={() => setActiveHotspot(activeHotspot === "scale" ? null : "scale")}
                 >
-                  <div className="absolute inset-0 border border-primary/0 group-hover/hotspot:border-primary/50 rounded-full transition-all duration-300 animate-pulse-slow"></div>
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full bg-primary text-primary-foreground text-[10px] px-2 py-1 opacity-0 group-hover/hotspot:opacity-100 transition-opacity whitespace-nowrap font-mono uppercase tracking-wider">
+                  <div className={`absolute inset-0 border rounded-full transition-all duration-300 animate-pulse-slow ${activeHotspot === "scale" ? "border-primary bg-primary/10" : "border-primary/0 group-hover/hotspot:border-primary/50"}`}></div>
+                  <div className={`absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full bg-primary text-primary-foreground text-[10px] px-2 py-1 transition-opacity whitespace-nowrap font-mono uppercase tracking-wider ${activeHotspot === "scale" ? "opacity-100" : "opacity-0 group-hover/hotspot:opacity-100"}`}>
                     Scale: Growth Modeling
                   </div>
                 </div>
@@ -165,10 +195,11 @@ export default function Home() {
                   <line x1="70%" y1="20%" x2="80%" y2="25%" stroke="currentColor" className={`text-primary transition-all duration-300 ${activeHotspot === 'structure' ? 'opacity-100 stroke-2' : 'opacity-0'}`} />
                 </svg>
                 
-                {/* Hover Instruction */}
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 text-xs font-mono text-muted-foreground bg-background/80 px-3 py-1 rounded-full border border-border/50 backdrop-blur-sm animate-bounce-slow">
+                {/* Hover/Tap Instruction */}
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 text-xs font-mono text-muted-foreground bg-background/80 px-3 py-1 rounded-full border border-border/50 backdrop-blur-sm animate-bounce-slow whitespace-nowrap">
                   <MousePointer2 className="w-3 h-3" />
-                  <span>EXPLORE BLUEPRINT</span>
+                  <span className="hidden md:inline">EXPLORE BLUEPRINT</span>
+                  <span className="md:hidden">TAP TO EXPLORE</span>
                 </div>
               </div>
             </div>
