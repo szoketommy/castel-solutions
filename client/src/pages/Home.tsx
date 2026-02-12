@@ -132,7 +132,7 @@ export default function Home() {
               {/* Architectural Sketch Image */}
               <div className="relative w-full h-full transition-transform duration-700 ease-out transform group-hover:scale-[1.02]">
                 <img 
-                  src="https://private-us-east-1.manuscdn.com/sessionFile/IFR2dxCHyfAUUD32juM9IS/sandbox/00BRDMwRFtxzaBSxZ4MN5d_1770926823826_na1fn_aGVyby1za2V0Y2gtY2xlYW4.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvSUZSMmR4Q0h5ZkFVVUQzMmp1TTlJUy9zYW5kYm94LzAwQlJETXdSRnR4emFCU3haNE1ONWRfMTc3MDkyNjgyMzgyNl9uYTFmbl9hR1Z5YnkxemEyVjBZMmd0WTJ4bFlXNC5wbmc~eC1vc3MtcHJvY2Vzcz1pbWFnZS9yZXNpemUsd18xOTIwLGhfMTkyMC9mb3JtYXQsd2VicC9xdWFsaXR5LHFfODAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTg3NjE2MDB9fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=l~eI6XmYrPCOx4hAh6TV8SWFnhd2iQP7Gc1A-o-8oZKjbFDBJeoWAojNTeuU2UYT5qCmlan4CNOohHz1Xzjs8sVsHch19Z~kMbwvoD-sen9SjdKN7GR-JaNi2PuMcqQfxXA6rrVABC5yFOhZJQyEEACWidvOm4oYNI1iYILhvh6Dtk0Tzl1iPOoYrL3RBuTaVdAvFAR1ntG13usZQ3N1hOJf~s2lbJErOLH5ofGe~-37kgha25jIs3d5t6iQs3ME-YQSpBPcSDzXqCsXdHqn-v~UgHMSCjBsmgrcVjBisfaGcOXUDs3JiIM3ONI9Fdq8-7SrbeEWd~HRuLPYHsp2Sg__" 
+                  src="https://files.manuscdn.com/user_upload_by_module/session_file/116991139/FxQwJDHxDzlKUvoR.png" 
                   alt="Architectural Sketch" 
                   className="w-full h-full object-contain mix-blend-multiply opacity-90"
                 />
