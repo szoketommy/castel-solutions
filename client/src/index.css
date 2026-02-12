@@ -78,7 +78,9 @@
 }
 
 .animate-draw-in {
-  animation: draw-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: draw-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+  opacity: 1 !important;
+  transform: translateY(0) !important;
 }
 
 .animate-pulse-slow {
