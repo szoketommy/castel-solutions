@@ -1,230 +1,173 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { ArrowRight, Check, ChevronRight, Layers, LayoutTemplate, Settings, Zap } from "lucide-react";
+import { ArrowRight, BarChart3, Layers, Ruler, Settings, Zap } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col font-body bg-background text-foreground selection:bg-accent selection:text-accent-foreground">
+    <div className="min-h-screen flex flex-col font-body selection:bg-primary/20">
       {/* Navigation */}
-      <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <header className="fixed top-0 w-full z-50 border-b border-border/50 bg-background/80 backdrop-blur-sm">
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="h-8 w-8 bg-primary flex items-center justify-center">
-              <span className="font-heading font-bold text-primary-foreground text-xl">C</span>
+            <div className="w-8 h-8 border-2 border-primary flex items-center justify-center">
+              <span className="font-heading font-bold text-lg text-primary">C</span>
             </div>
-            <span className="font-heading font-bold text-lg tracking-tight">castel.solutions</span>
+            <span className="font-heading font-bold text-xl tracking-tight">CASTEL.SOLUTIONS</span>
           </div>
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
-            <a href="#philosophy" className="hover:text-primary transition-colors">Philosophy</a>
-            <a href="#services" className="hover:text-primary transition-colors">Services</a>
-            <a href="#approach" className="hover:text-primary transition-colors">Approach</a>
-            <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
+          
+          <nav className="hidden md:flex items-center gap-8">
+            {["Philosophy", "Services", "Approach", "Contact"].map((item) => (
+              <a key={item} href={`#${item.toLowerCase()}`} className="text-sm font-medium hover:text-primary transition-colors uppercase tracking-wider">
+                {item}
+              </a>
+            ))}
           </nav>
-          <Button variant="default" className="font-mono text-xs tracking-wider uppercase rounded-none">
+          
+          <Button variant="outline" className="rounded-none border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-mono text-xs uppercase tracking-widest">
             Book Audit
           </Button>
         </div>
       </header>
 
-      <main className="flex-1">
+      <main className="flex-1 pt-16">
         {/* Hero Section */}
-        <section className="relative min-h-[90vh] flex items-center border-b border-border overflow-hidden">
-          <div className="absolute inset-0 z-0">
-            <img 
-              src="/images/hero-architecture.jpg" 
-              alt="Brutalist Architecture" 
-              className="w-full h-full object-cover opacity-20 grayscale sepia-[.3]"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent"></div>
+        <section className="relative min-h-[90vh] flex items-center overflow-hidden border-b border-border">
+          {/* Technical Grid Lines */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute top-1/4 left-0 w-full h-px bg-border/50"></div>
+            <div className="absolute top-3/4 left-0 w-full h-px bg-border/50"></div>
+            <div className="absolute top-0 left-1/4 w-px h-full bg-border/50"></div>
+            <div className="absolute top-0 left-3/4 w-px h-full bg-border/50"></div>
             
-            {/* Grid Overlay */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
+            {/* Measurement Markers */}
+            <div className="absolute top-1/4 left-4 font-mono text-[10px] text-muted-foreground">ELEVATION: 1200</div>
+            <div className="absolute bottom-4 right-1/4 font-mono text-[10px] text-muted-foreground">SCALE: 1:100</div>
           </div>
 
-          <div className="container relative z-10 grid lg:grid-cols-2 gap-12 items-center pt-20 pb-32">
+          <div className="container relative z-10 grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
-              <div className="inline-flex items-center gap-2 border border-border px-3 py-1 bg-background/50 backdrop-blur-sm">
-                <span className="w-2 h-2 bg-accent"></span>
+              <div className="inline-flex items-center gap-2 border border-primary/30 px-3 py-1 bg-background/50 backdrop-blur-sm">
+                <span className="w-2 h-2 bg-primary"></span>
                 <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">RevOps Architects for Scale</span>
               </div>
               
-              <h1 className="font-heading text-5xl md:text-7xl font-bold leading-[0.9] tracking-tight text-primary">
-                Architect<span className="text-accent">ING</span><br />
-                Outcomes.
+              <h1 className="font-heading text-5xl md:text-7xl font-bold leading-[0.9] tracking-tight text-foreground">
+                ARCHITECTING <br/>
+                <span className="text-primary italic">OUTCOMES.</span>
               </h1>
               
-              <p className="text-xl text-muted-foreground max-w-lg leading-relaxed border-l-2 border-accent pl-6">
-                From <span className="font-bold text-foreground">PROblems</span> to <span className="font-bold text-foreground">PROfit</span>. We design, audit, and rebuild the systems behind your business so growth becomes predictable.
+              <p className="text-lg md:text-xl text-muted-foreground max-w-lg leading-relaxed border-l-2 border-primary/20 pl-6">
+                From <strong className="text-foreground">PROblems</strong> to <strong className="text-foreground">PROfit</strong>. We design, audit, and rebuild the systems behind your business so growth becomes predictable.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Button size="lg" className="rounded-none text-base px-8 h-14 bg-primary hover:bg-primary/90">
-                  Start Architecture
-                  <ArrowRight className="ml-2 h-4 w-4" />
+              <div className="flex flex-wrap gap-4 pt-4">
+                <Button size="lg" className="rounded-none bg-primary text-primary-foreground hover:bg-primary/90 font-mono text-xs uppercase tracking-widest h-12 px-8 border-2 border-transparent">
+                  Start Architecture <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
-                <Button variant="outline" size="lg" className="rounded-none text-base px-8 h-14 border-primary text-primary hover:bg-primary/5">
+                <Button size="lg" variant="outline" className="rounded-none border-2 border-foreground/20 hover:border-primary hover:text-primary font-mono text-xs uppercase tracking-widest h-12 px-8 bg-transparent">
                   View Case Studies
                 </Button>
               </div>
+
+              <div className="pt-8 flex items-center gap-8 text-xs font-mono text-muted-foreground">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 border border-current"></div>
+                  <span>SYSTEM_AUDIT_V1</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 border border-current rounded-full"></div>
+                  <span>STATUS: ONLINE</span>
+                </div>
+              </div>
             </div>
 
-            <div className="hidden lg:block relative">
-              <div className="relative aspect-square max-w-md mx-auto border border-border bg-background p-4 shadow-2xl rotate-3 transition-transform hover:rotate-0 duration-700">
-                <div className="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-accent"></div>
-                <div className="absolute -bottom-4 -right-4 w-24 h-24 border-b-2 border-r-2 border-accent"></div>
+            <div className="relative h-[500px] lg:h-[700px] w-full flex items-center justify-center">
+              {/* Architectural Sketch Image */}
+              <div className="relative w-full h-full">
                 <img 
-                  src="/images/blueprint-abstract.jpg" 
-                  alt="System Blueprint" 
-                  className="w-full h-full object-cover border border-border grayscale contrast-125"
+                  src="https://private-us-east-1.manuscdn.com/sessionFile/IFR2dxCHyfAUUD32juM9IS/sandbox/00BRDMwRFtxzaBSxZ4MN5d_1770926823826_na1fn_aGVyby1za2V0Y2gtY2xlYW4.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvSUZSMmR4Q0h5ZkFVVUQzMmp1TTlJUy9zYW5kYm94LzAwQlJETXdSRnR4emFCU3haNE1ONWRfMTc3MDkyNjgyMzgyNl9uYTFmbl9hR1Z5YnkxemEyVjBZMmd0WTJ4bFlXNC5wbmc~eC1vc3MtcHJvY2Vzcz1pbWFnZS9yZXNpemUsd18xOTIwLGhfMTkyMC9mb3JtYXQsd2VicC9xdWFsaXR5LHFfODAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTg3NjE2MDB9fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=l~eI6XmYrPCOx4hAh6TV8SWFnhd2iQP7Gc1A-o-8oZKjbFDBJeoWAojNTeuU2UYT5qCmlan4CNOohHz1Xzjs8sVsHch19Z~kMbwvoD-sen9SjdKN7GR-JaNi2PuMcqQfxXA6rrVABC5yFOhZJQyEEACWidvOm4oYNI1iYILhvh6Dtk0Tzl1iPOoYrL3RBuTaVdAvFAR1ntG13usZQ3N1hOJf~s2lbJErOLH5ofGe~-37kgha25jIs3d5t6iQs3ME-YQSpBPcSDzXqCsXdHqn-v~UgHMSCjBsmgrcVjBisfaGcOXUDs3JiIM3ONI9Fdq8-7SrbeEWd~HRuLPYHsp2Sg__" 
+                  alt="Architectural Sketch" 
+                  className="w-full h-full object-contain mix-blend-multiply opacity-90"
                 />
-                <div className="absolute bottom-0 left-0 right-0 bg-background/90 border-t border-border p-4 font-mono text-xs">
-                  <div className="flex justify-between mb-2">
-                    <span className="text-muted-foreground">FIG 1.0</span>
-                    <span>SYSTEM_AUDIT_V1</span>
-                  </div>
-                  <div className="h-1 w-full bg-muted overflow-hidden">
-                    <div className="h-full bg-accent w-[72%]"></div>
-                  </div>
+                
+                {/* Floating Annotations */}
+                <div className="absolute top-[20%] right-[10%] bg-background border border-primary/50 p-2 shadow-sm max-w-[150px]">
+                  <div className="text-[10px] font-mono text-muted-foreground mb-1">EFFICIENCY</div>
+                  <div className="text-xl font-bold text-primary">85%</div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </section>
+                
+                <div className="absolute bottom-[30%] left-[10%] bg-background border border-primary/50 p-2 shadow-sm max-w-[150px]">
+                  <div className="text-[10px] font-mono text-muted-foreground mb-1">GROWTH_RATE</div>
+                  <div className="text-xl font-bold text-primary">+40%</div>
+                </div>
 
-        {/* The Problem Section */}
-        <section className="py-24 bg-muted/30 border-b border-border">
-          <div className="container">
-            <div className="grid lg:grid-cols-12 gap-12">
-              <div className="lg:col-span-4 space-y-6">
-                <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary">
-                  Growth Exposes Everything.
-                </h2>
-                <p className="text-muted-foreground leading-relaxed">
-                  Most businesses don't fail because of bad ideas. They fail because systems don't scale, operations leak value, and growth outpaces structure.
-                </p>
-                <div className="p-6 bg-background border border-border border-l-4 border-l-destructive">
-                  <p className="font-heading font-bold text-lg mb-2">The Founder Reality</p>
-                  <p className="text-sm text-muted-foreground">Revenue grows. Complexity explodes. Profit shrinks.</p>
-                </div>
-              </div>
-              
-              <div className="lg:col-span-8 grid sm:grid-cols-2 gap-6">
-                {[
-                  { title: "Broken Workflows", desc: "Processes that rely on 'heroics' instead of design." },
-                  { title: "Redundant Tools", desc: "Tech stacks that add friction rather than flow." },
-                  { title: "Manual Processes", desc: "High-error tasks that consume valuable talent." },
-                  { title: "Misaligned Teams", desc: "Silos that prevent cross-functional execution." }
-                ].map((item, i) => (
-                  <Card key={i} className="rounded-none border-border bg-background hover:border-accent transition-colors duration-300 group">
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-3 font-mono text-sm uppercase tracking-wider text-muted-foreground group-hover:text-accent transition-colors">
-                        <span className="text-xs">0{i + 1}</span>
-                        {item.title}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="font-heading text-xl font-medium text-primary">{item.desc}</p>
-                    </CardContent>
-                  </Card>
-                ))}
+                {/* Decorative Lines connecting annotations */}
+                <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: -1 }}>
+                  <line x1="80%" y1="25%" x2="60%" y2="40%" stroke="currentColor" className="text-primary/30" strokeWidth="1" strokeDasharray="4 4" />
+                  <line x1="20%" y1="65%" x2="40%" y2="50%" stroke="currentColor" className="text-primary/30" strokeWidth="1" strokeDasharray="4 4" />
+                </svg>
               </div>
             </div>
           </div>
         </section>
 
         {/* Philosophy Section */}
-        <section id="philosophy" className="py-24 border-b border-border relative overflow-hidden">
-          <div className="absolute right-0 top-0 w-1/3 h-full bg-muted/20 -skew-x-12 transform origin-top-right"></div>
-          
-          <div className="container relative z-10">
-            <div className="text-center max-w-3xl mx-auto mb-20">
-              <span className="font-mono text-xs uppercase tracking-widest text-accent mb-4 block">Our Philosophy</span>
-              <h2 className="font-heading text-4xl md:text-5xl font-bold text-primary mb-6">Organize First. Then Scale.</h2>
-              <p className="text-xl text-muted-foreground">We don't start with tools. We start with architecture.</p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              {[
-                { 
-                  icon: LayoutTemplate, 
-                  title: "Architecture before Acceleration", 
-                  text: "Building the structural integrity required to support weight before adding load." 
-                },
-                { 
-                  icon: Layers, 
-                  title: "Systems over Heroics", 
-                  text: "Replacing individual dependency with reliable, repeatable process design." 
-                },
-                { 
-                  icon: Check, 
-                  title: "Execution over Decks", 
-                  text: "We don't deliver slideware. We deliver implemented, working outcomes." 
-                }
-              ].map((feature, i) => (
-                <div key={i} className="relative p-8 border border-border bg-background group hover:-translate-y-1 transition-transform duration-300">
-                  <div className="absolute top-0 left-0 w-full h-1 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-                  <feature.icon className="w-10 h-10 text-accent mb-6 stroke-1" />
-                  <h3 className="font-heading text-xl font-bold mb-4">{feature.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{feature.text}</p>
-                </div>
-              ))}
+        <section id="philosophy" className="py-24 border-b border-border bg-background/50">
+          <div className="container">
+            <div className="grid md:grid-cols-12 gap-12">
+              <div className="md:col-span-4">
+                <h2 className="font-heading text-3xl font-bold mb-4">THE BLUEPRINT</h2>
+                <div className="w-12 h-1 bg-primary mb-6"></div>
+                <p className="text-muted-foreground">
+                  We don't just fix problems; we re-engineer the foundation. Our philosophy is rooted in the belief that sustainable growth requires structural integrity.
+                </p>
+              </div>
+              <div className="md:col-span-8 grid sm:grid-cols-2 gap-8">
+                {[
+                  { title: "Structural Integrity", desc: "Building systems that withstand the pressure of scaling." },
+                  { title: "Raw Materiality", desc: "Using data as the raw material for decision making." },
+                  { title: "Information Density", desc: "Clear, concise communication channels that eliminate noise." },
+                  { title: "Timeless Design", desc: "Processes that adapt and endure market shifts." }
+                ].map((item, i) => (
+                  <div key={i} className="border border-border p-6 hover:border-primary transition-colors group relative overflow-hidden">
+                    <div className="absolute top-0 right-0 p-2 opacity-20 group-hover:opacity-100 transition-opacity">
+                      <Ruler className="w-4 h-4 text-primary" />
+                    </div>
+                    <h3 className="font-heading text-lg font-bold mb-2 group-hover:text-primary transition-colors">{item.title}</h3>
+                    <p className="text-sm text-muted-foreground">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
 
         {/* Services Section */}
-        <section id="services" className="py-24 bg-primary text-primary-foreground relative">
-          <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'url("/images/detail-stone.jpg")', backgroundSize: 'cover' }}></div>
-          
-          <div className="container relative z-10">
-            <div className="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-primary-foreground/20 pb-8">
+        <section id="services" className="py-24">
+          <div className="container">
+            <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
               <div>
-                <h2 className="font-heading text-4xl md:text-5xl font-bold mb-4">What We Do</h2>
-                <p className="text-primary-foreground/70 max-w-md">At the intersection of Strategy, Operations, and Automation.</p>
+                <div className="font-mono text-xs text-primary mb-2 uppercase tracking-widest">Capabilities</div>
+                <h2 className="font-heading text-4xl font-bold">OPERATIONAL ARCHITECTURE</h2>
               </div>
-              <div className="hidden md:block font-mono text-sm opacity-50">
-                // SERVICES_LIST_V2.0
-              </div>
+              <Button variant="outline" className="rounded-none border-foreground hover:bg-foreground hover:text-background font-mono text-xs uppercase tracking-widest">
+                Full Service List
+              </Button>
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-x-16 gap-y-12">
+            <div className="grid md:grid-cols-3 gap-px bg-border border border-border">
               {[
-                {
-                  title: "Systems & Infrastructure Audit",
-                  items: ["Tools & Tech Stack Analysis", "Process Flow Mapping", "Data Health Check", "Redundancy Identification"],
-                  desc: "A deep diagnostic to create a clear roadmap to simplification and scale."
-                },
-                {
-                  title: "Business Process Automation",
-                  items: ["Identify Repetitive Tasks", "High-Error Task Elimination", "Bottleneck Removal", "Implementation that Sticks"],
-                  desc: "Manual work is expensive. We design automation that supports human talent."
-                },
-                {
-                  title: "Marketing Operations",
-                  items: ["Lead Flow Alignment", "CRM System Optimization", "Attribution Reporting", "Funnel Performance"],
-                  desc: "Marketing without operations is noise. We ensure your systems capture value."
-                },
-                {
-                  title: "Strategic Pressure-Testing",
-                  items: ["Operational Readiness", "Growth Assumption Testing", "Organizational Design", "Reality-Check Strategy"],
-                  desc: "Ensuring your strategy survives contact with reality."
-                }
+                { icon: Layers, title: "System Audit", desc: "Deep dive analysis of your current operational infrastructure." },
+                { icon: Settings, title: "Process Engineering", desc: "Designing efficient workflows that minimize friction." },
+                { icon: BarChart3, title: "Growth Modeling", desc: "Predictive analytics to forecast and prepare for scale." },
+                { icon: Zap, title: "Automation", desc: "Replacing manual redundancy with intelligent automated systems." },
+                { icon: Ruler, title: "Standardization", desc: "Creating the playbook for consistent, high-quality output." },
+                { icon: Layers, title: "Tech Stack Optimization", desc: "Aligning your tools to work as a cohesive ecosystem." }
               ].map((service, i) => (
-                <div key={i} className="group">
-                  <div className="flex items-baseline justify-between mb-4">
-                    <h3 className="font-heading text-2xl font-bold">{service.title}</h3>
-                    <span className="font-mono text-xs opacity-50">0{i+1}</span>
-                  </div>
-                  <p className="text-primary-foreground/80 mb-6 leading-relaxed">{service.desc}</p>
-                  <ul className="space-y-3 border-l border-primary-foreground/20 pl-6">
-                    {service.items.map((item, j) => (
-                      <li key={j} className="flex items-center gap-3 text-sm font-medium">
-                        <span className="w-1.5 h-1.5 bg-accent rounded-full"></span>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
+                <div key={i} className="bg-background p-8 hover:bg-accent/10 transition-colors group">
+                  <service.icon className="w-8 h-8 text-muted-foreground mb-6 group-hover:text-primary transition-colors" />
+                  <h3 className="font-heading text-xl font-bold mb-3">{service.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{service.desc}</p>
                 </div>
               ))}
             </div>
@@ -232,69 +175,64 @@ export default function Home() {
         </section>
 
         {/* CTA Section */}
-        <section id="contact" className="py-32 bg-background border-t border-border">
-          <div className="container max-w-4xl mx-auto text-center">
-            <div className="inline-block mb-8 p-4 border border-border bg-muted/30 rotate-2">
-              <span className="font-mono text-sm font-bold text-primary uppercase tracking-widest">Outcome &gt; Activity</span>
-            </div>
-            
-            <h2 className="font-heading text-5xl md:text-6xl font-bold text-primary mb-8 leading-tight">
-              Ready to move from <br/>
-              <span className="text-muted-foreground line-through decoration-accent decoration-2">PROblems</span> to <span className="text-accent">PROfit</span>?
-            </h2>
-            
-            <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
-              Let's architect outcomes—not just ideas. Book a consultation to see if your foundation is ready for scale.
+        <section className="py-24 bg-foreground text-background relative overflow-hidden">
+          {/* Abstract Blueprint Background */}
+          <div className="absolute inset-0 opacity-10 pointer-events-none">
+             <svg width="100%" height="100%">
+               <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                 <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="0.5"/>
+               </pattern>
+               <rect width="100%" height="100%" fill="url(#grid)" />
+             </svg>
+          </div>
+
+          <div className="container relative z-10 text-center">
+            <h2 className="font-heading text-4xl md:text-6xl font-bold mb-6">READY TO REBUILD?</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
+              Stop patching cracks. Start building a fortress. Let's architect a system that scales with your ambition.
             </p>
-            
-            <div className="flex flex-col sm:flex-row justify-center gap-6">
-              <Button size="lg" className="h-16 px-10 text-lg rounded-none bg-primary hover:bg-primary/90 shadow-xl hover:shadow-2xl transition-all">
-                Book an Appointment
-                <ChevronRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button variant="outline" size="lg" className="h-16 px-10 text-lg rounded-none border-2 hover:bg-muted">
-                Explore Services
-              </Button>
-            </div>
+            <Button size="lg" className="rounded-none bg-primary text-primary-foreground hover:bg-primary/90 font-mono text-sm uppercase tracking-widest h-14 px-10">
+              Schedule Your Blueprint Session
+            </Button>
           </div>
         </section>
       </main>
 
-      <footer className="bg-primary text-primary-foreground py-16 border-t border-primary-foreground/10">
-        <div className="container grid md:grid-cols-4 gap-12">
+      <footer className="border-t border-border py-12 bg-background text-sm">
+        <div className="container grid md:grid-cols-4 gap-8">
           <div className="col-span-2">
-            <div className="flex items-center gap-2 mb-6">
-              <div className="h-6 w-6 bg-accent flex items-center justify-center">
-                <span className="font-heading font-bold text-primary text-sm">C</span>
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-6 h-6 border border-primary flex items-center justify-center">
+                <span className="font-heading font-bold text-xs text-primary">C</span>
               </div>
-              <span className="font-heading font-bold text-lg tracking-tight">castel.solutions</span>
+              <span className="font-heading font-bold tracking-tight">CASTEL.SOLUTIONS</span>
             </div>
-            <p className="text-primary-foreground/60 max-w-sm leading-relaxed">
-              Operations Architects designing, systemizing, and implementing the operational backbone required for growth.
+            <p className="text-muted-foreground max-w-xs">
+              Operations Architecture & Systemization for high-growth enterprises.
             </p>
           </div>
           
           <div>
-            <h4 className="font-mono text-xs uppercase tracking-widest mb-6 opacity-70">Sitemap</h4>
-            <ul className="space-y-4 text-sm">
-              <li><a href="#" className="hover:text-accent transition-colors">Home</a></li>
-              <li><a href="#philosophy" className="hover:text-accent transition-colors">Philosophy</a></li>
-              <li><a href="#services" className="hover:text-accent transition-colors">Services</a></li>
-              <li><a href="#contact" className="hover:text-accent transition-colors">Contact</a></li>
+            <h4 className="font-bold mb-4 uppercase tracking-wider text-xs">Sitemap</h4>
+            <ul className="space-y-2 text-muted-foreground">
+              <li><a href="#" className="hover:text-primary">Home</a></li>
+              <li><a href="#services" className="hover:text-primary">Services</a></li>
+              <li><a href="#philosophy" className="hover:text-primary">Philosophy</a></li>
+              <li><a href="#contact" className="hover:text-primary">Contact</a></li>
             </ul>
           </div>
           
           <div>
-            <h4 className="font-mono text-xs uppercase tracking-widest mb-6 opacity-70">Legal</h4>
-            <ul className="space-y-4 text-sm">
-              <li><a href="#" className="hover:text-accent transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-accent transition-colors">Terms of Service</a></li>
+            <h4 className="font-bold mb-4 uppercase tracking-wider text-xs">Legal</h4>
+            <ul className="space-y-2 text-muted-foreground">
+              <li><a href="#" className="hover:text-primary">Privacy Policy</a></li>
+              <li><a href="#" className="hover:text-primary">Terms of Service</a></li>
             </ul>
           </div>
         </div>
-        <div className="container mt-16 pt-8 border-t border-primary-foreground/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-primary-foreground/40 font-mono">
-          <p>&copy; {new Date().getFullYear()} castel.solutions. All rights reserved.</p>
-          <p>Architected in 2025.</p>
+        <div className="container mt-12 pt-8 border-t border-border/50 flex justify-between items-center text-xs text-muted-foreground font-mono">
+          <p>&copy; 2024 CASTEL.SOLUTIONS. ALL RIGHTS RESERVED.</p>
+          <p>EST. 2024 // V0.1</p>
         </div>
       </footer>
     </div>

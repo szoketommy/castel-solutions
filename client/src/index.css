@@ -47,57 +47,56 @@
 }
 
 :root {
-  /* Espresso Brown Primary */
-  --primary: oklch(0.28 0.04 45); 
-  --primary-foreground: oklch(0.96 0.01 85);
+  /* Terracotta & Ink Palette */
+  --color-terracotta: #D35400;
+  --color-ink: #1A1A1A;
+  --color-paper: #F9F7F2;
+  --color-graphite: #7F8C8D;
+
+  --primary: var(--color-terracotta);
+  --primary-foreground: #FFFFFF;
+  --sidebar-primary: var(--color-terracotta);
+  --sidebar-primary-foreground: #FFFFFF;
   
-  /* Warm Sand Secondary */
-  --secondary: oklch(0.88 0.03 85);
-  --secondary-foreground: oklch(0.28 0.04 45);
+  --background: var(--color-paper);
+  --foreground: var(--color-ink);
   
-  /* Off-white/Cream Background */
-  --background: oklch(0.97 0.01 90);
-  --foreground: oklch(0.25 0.02 45);
+  --card: #FFFFFF;
+  --card-foreground: var(--color-ink);
   
-  /* Card - slightly warmer than bg */
-  --card: oklch(0.95 0.02 85);
-  --card-foreground: oklch(0.25 0.02 45);
+  --popover: #FFFFFF;
+  --popover-foreground: var(--color-ink);
   
-  --popover: oklch(0.97 0.01 90);
-  --popover-foreground: oklch(0.25 0.02 45);
+  --secondary: #EAECEE;
+  --secondary-foreground: var(--color-ink);
   
-  /* Muted - darker sand */
-  --muted: oklch(0.92 0.02 85);
-  --muted-foreground: oklch(0.45 0.03 45);
+  --muted: #F2F4F6;
+  --muted-foreground: var(--color-graphite);
   
-  /* Accent - Burnt Sienna */
-  --accent: oklch(0.60 0.12 45);
-  --accent-foreground: oklch(0.98 0.01 85);
+  --accent: #FDF2E9; /* Light terracotta tint */
+  --accent-foreground: var(--color-terracotta);
   
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0 0);
   
-  /* Border - visible structural lines */
-  --border: oklch(0.80 0.02 85);
-  --input: oklch(0.85 0.02 85);
-  --ring: oklch(0.28 0.04 45);
+  --border: #D5D8DC;
+  --input: #D5D8DC;
+  --ring: var(--color-terracotta);
   
-  --radius: 0rem; /* Brutalist sharp corners */
+  --radius: 0px; /* Sharp corners for technical feel */
   
-  --chart-1: oklch(0.28 0.04 45);
-  --chart-2: oklch(0.60 0.12 45);
-  --chart-3: oklch(0.88 0.03 85);
-  --chart-4: oklch(0.45 0.03 45);
-  --chart-5: oklch(0.25 0.02 45);
+  --chart-1: var(--color-terracotta);
+  --chart-2: #E67E22;
+  --chart-3: #2C3E50;
+  --chart-4: #34495E;
+  --chart-5: #95A5A6;
   
-  --sidebar: oklch(0.95 0.02 85);
-  --sidebar-foreground: oklch(0.25 0.02 45);
-  --sidebar-primary: oklch(0.28 0.04 45);
-  --sidebar-primary-foreground: oklch(0.96 0.01 85);
-  --sidebar-accent: oklch(0.92 0.02 85);
-  --sidebar-accent-foreground: oklch(0.25 0.02 45);
-  --sidebar-border: oklch(0.80 0.02 85);
-  --sidebar-ring: oklch(0.28 0.04 45);
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: var(--color-ink);
+  --sidebar-accent: #F2F4F6;
+  --sidebar-accent-foreground: var(--color-ink);
+  --sidebar-border: #E5E7EB;
+  --sidebar-ring: var(--color-terracotta);
 }
 
 .dark {
@@ -146,6 +145,10 @@
   }
   body {
     @apply bg-background text-foreground;
+    background-image: url('https://private-us-east-1.manuscdn.com/sessionFile/IFR2dxCHyfAUUD32juM9IS/sandbox/00BRDMwRFtxzaBSxZ4MN5d-img-2_1770926820000_na1fn_cGFwZXItZ3JpZC10ZXh0dXJl.jpg?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvSUZSMmR4Q0h5ZkFVVUQzMmp1TTlJUy9zYW5kYm94LzAwQlJETXdSRnR4emFCU3haNE1ONWQtaW1nLTJfMTc3MDkyNjgyMDAwMF9uYTFmbl9jR0Z3WlhJdFozSnBaQzEwWlhoMGRYSmwuanBnP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLHdfMTkyMCxoXzE5MjAvZm9ybWF0LHdlYnAvcXVhbGl0eSxxXzgwIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzk4NzYxNjAwfX19XX0_&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=FjH~olvxb59Cs2U7MyeVqFeYxeYsxryJDaR8dmS~8Nb3TO7TGwJzRwBQFbmiiXyZZ45BE5ePuQBGvMzV8sRX~r63WNhCxk0HvEtw6TY7UjRmPxX22Gv3Wm8If33sj6jbCf5NNAEIO-K~NXJlLcHVJm09nny8uwkHUf04ha9xf8vw6e8EEAkjV4ZupIhy5TxbqNBxsCphvNdCxSfVcPUEJiPtG7XgBBeOGmanBUrI7~5UBXayfQPe-tGblV4RWm6LvLxPVABSecPZvF8OzmkxI9TpGRxezwvs8yZQXoOXWQx-QH71f3VnnhYJJ8mAeuV-51UAcCJfI~p1GeC-CabuVg__');
+    background-repeat: repeat;
+    background-size: 500px;
+    background-blend-mode: multiply;
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
