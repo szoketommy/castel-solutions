@@ -1,8 +1,28 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowRight, BarChart3, Layers, Ruler, Settings, Zap } from "lucide-react";
+import { ArrowRight, BarChart3, Layers, Ruler, Settings, Zap, MousePointer2 } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Home() {
+  const [activeHotspot, setActiveHotspot] = useState<string | null>(null);
+  const observerRef = useRef<IntersectionObserver | null>(null);
+
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate-draw-in");
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll(".draw-trigger").forEach((el) => {
+      observerRef.current?.observe(el);
+    });
+
+    return () => observerRef.current?.disconnect();
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col font-body selection:bg-primary/20">
       {/* Navigation */}
@@ -32,16 +52,16 @@ export default function Home() {
       <main className="flex-1 pt-16">
         {/* Hero Section */}
         <section className="relative min-h-[90vh] flex items-center overflow-hidden border-b border-border">
-          {/* Technical Grid Lines */}
+          {/* Technical Grid Lines - Animated */}
           <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-1/4 left-0 w-full h-px bg-border/50"></div>
-            <div className="absolute top-3/4 left-0 w-full h-px bg-border/50"></div>
-            <div className="absolute top-0 left-1/4 w-px h-full bg-border/50"></div>
-            <div className="absolute top-0 left-3/4 w-px h-full bg-border/50"></div>
+            <div className="absolute top-1/4 left-0 w-full h-px bg-border/50 origin-left animate-[grow-x_1.5s_ease-out_forwards]"></div>
+            <div className="absolute top-3/4 left-0 w-full h-px bg-border/50 origin-right animate-[grow-x_1.5s_ease-out_0.5s_forwards]"></div>
+            <div className="absolute top-0 left-1/4 w-px h-full bg-border/50 origin-top animate-[grow-y_1.5s_ease-out_0.2s_forwards]"></div>
+            <div className="absolute top-0 left-3/4 w-px h-full bg-border/50 origin-bottom animate-[grow-y_1.5s_ease-out_0.7s_forwards]"></div>
             
             {/* Measurement Markers */}
-            <div className="absolute top-1/4 left-4 font-mono text-[10px] text-muted-foreground">ELEVATION: 1200</div>
-            <div className="absolute bottom-4 right-1/4 font-mono text-[10px] text-muted-foreground">SCALE: 1:100</div>
+            <div className="absolute top-1/4 left-4 font-mono text-[10px] text-muted-foreground animate-fade-in opacity-0 [animation-delay:1s] [animation-fill-mode:forwards]">ELEVATION: 1200</div>
+            <div className="absolute bottom-4 right-1/4 font-mono text-[10px] text-muted-foreground animate-fade-in opacity-0 [animation-delay:1.2s] [animation-fill-mode:forwards]">SCALE: 1:100</div>
           </div>
 
           <div className="container relative z-10 grid lg:grid-cols-2 gap-12 items-center">
@@ -81,22 +101,56 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="relative h-[500px] lg:h-[700px] w-full flex items-center justify-center">
+            <div className="relative h-[500px] lg:h-[700px] w-full flex items-center justify-center group perspective-1000">
               {/* Architectural Sketch Image */}
-              <div className="relative w-full h-full">
+              <div className="relative w-full h-full transition-transform duration-700 ease-out transform group-hover:scale-[1.02]">
                 <img 
                   src="https://private-us-east-1.manuscdn.com/sessionFile/IFR2dxCHyfAUUD32juM9IS/sandbox/00BRDMwRFtxzaBSxZ4MN5d_1770926823826_na1fn_aGVyby1za2V0Y2gtY2xlYW4.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvSUZSMmR4Q0h5ZkFVVUQzMmp1TTlJUy9zYW5kYm94LzAwQlJETXdSRnR4emFCU3haNE1ONWRfMTc3MDkyNjgyMzgyNl9uYTFmbl9hR1Z5YnkxemEyVjBZMmd0WTJ4bFlXNC5wbmc~eC1vc3MtcHJvY2Vzcz1pbWFnZS9yZXNpemUsd18xOTIwLGhfMTkyMC9mb3JtYXQsd2VicC9xdWFsaXR5LHFfODAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTg3NjE2MDB9fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=l~eI6XmYrPCOx4hAh6TV8SWFnhd2iQP7Gc1A-o-8oZKjbFDBJeoWAojNTeuU2UYT5qCmlan4CNOohHz1Xzjs8sVsHch19Z~kMbwvoD-sen9SjdKN7GR-JaNi2PuMcqQfxXA6rrVABC5yFOhZJQyEEACWidvOm4oYNI1iYILhvh6Dtk0Tzl1iPOoYrL3RBuTaVdAvFAR1ntG13usZQ3N1hOJf~s2lbJErOLH5ofGe~-37kgha25jIs3d5t6iQs3ME-YQSpBPcSDzXqCsXdHqn-v~UgHMSCjBsmgrcVjBisfaGcOXUDs3JiIM3ONI9Fdq8-7SrbeEWd~HRuLPYHsp2Sg__" 
                   alt="Architectural Sketch" 
                   className="w-full h-full object-contain mix-blend-multiply opacity-90"
                 />
                 
-                {/* Floating Annotations */}
-                <div className="absolute top-[20%] right-[10%] bg-background border border-primary/50 p-2 shadow-sm max-w-[150px]">
+                {/* Interactive Hotspots */}
+                <div 
+                  className="absolute top-[35%] left-[45%] w-24 h-24 cursor-pointer z-20 group/hotspot"
+                  onMouseEnter={() => setActiveHotspot("foundation")}
+                  onMouseLeave={() => setActiveHotspot(null)}
+                >
+                  <div className="absolute inset-0 border border-primary/0 group-hover/hotspot:border-primary/50 rounded-full transition-all duration-300 animate-pulse-slow"></div>
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full bg-primary text-primary-foreground text-[10px] px-2 py-1 opacity-0 group-hover/hotspot:opacity-100 transition-opacity whitespace-nowrap font-mono uppercase tracking-wider">
+                    Foundation: System Audit
+                  </div>
+                </div>
+
+                <div 
+                  className="absolute top-[15%] right-[30%] w-20 h-20 cursor-pointer z-20 group/hotspot"
+                  onMouseEnter={() => setActiveHotspot("structure")}
+                  onMouseLeave={() => setActiveHotspot(null)}
+                >
+                  <div className="absolute inset-0 border border-primary/0 group-hover/hotspot:border-primary/50 rounded-full transition-all duration-300 animate-pulse-slow"></div>
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full bg-primary text-primary-foreground text-[10px] px-2 py-1 opacity-0 group-hover/hotspot:opacity-100 transition-opacity whitespace-nowrap font-mono uppercase tracking-wider">
+                    Structure: Process Engineering
+                  </div>
+                </div>
+
+                <div 
+                  className="absolute bottom-[20%] left-[20%] w-28 h-16 cursor-pointer z-20 group/hotspot"
+                  onMouseEnter={() => setActiveHotspot("scale")}
+                  onMouseLeave={() => setActiveHotspot(null)}
+                >
+                  <div className="absolute inset-0 border border-primary/0 group-hover/hotspot:border-primary/50 rounded-full transition-all duration-300 animate-pulse-slow"></div>
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full bg-primary text-primary-foreground text-[10px] px-2 py-1 opacity-0 group-hover/hotspot:opacity-100 transition-opacity whitespace-nowrap font-mono uppercase tracking-wider">
+                    Scale: Growth Modeling
+                  </div>
+                </div>
+
+                {/* Floating Annotations - Dynamic based on hover */}
+                <div className={`absolute top-[20%] right-[10%] bg-background border border-primary/50 p-2 shadow-sm max-w-[150px] transition-all duration-300 ${activeHotspot === 'structure' ? 'scale-110 border-primary bg-primary/5' : ''}`}>
                   <div className="text-[10px] font-mono text-muted-foreground mb-1">EFFICIENCY</div>
                   <div className="text-xl font-bold text-primary">85%</div>
                 </div>
                 
-                <div className="absolute bottom-[30%] left-[10%] bg-background border border-primary/50 p-2 shadow-sm max-w-[150px]">
+                <div className={`absolute bottom-[30%] left-[10%] bg-background border border-primary/50 p-2 shadow-sm max-w-[150px] transition-all duration-300 ${activeHotspot === 'scale' ? 'scale-110 border-primary bg-primary/5' : ''}`}>
                   <div className="text-[10px] font-mono text-muted-foreground mb-1">GROWTH_RATE</div>
                   <div className="text-xl font-bold text-primary">+40%</div>
                 </div>
@@ -105,7 +159,17 @@ export default function Home() {
                 <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: -1 }}>
                   <line x1="80%" y1="25%" x2="60%" y2="40%" stroke="currentColor" className="text-primary/30" strokeWidth="1" strokeDasharray="4 4" />
                   <line x1="20%" y1="65%" x2="40%" y2="50%" stroke="currentColor" className="text-primary/30" strokeWidth="1" strokeDasharray="4 4" />
+                  
+                  {/* Dynamic connection lines */}
+                  <line x1="50%" y1="40%" x2="20%" y2="65%" stroke="currentColor" className={`text-primary transition-all duration-300 ${activeHotspot === 'foundation' ? 'opacity-100 stroke-2' : 'opacity-0'}`} />
+                  <line x1="70%" y1="20%" x2="80%" y2="25%" stroke="currentColor" className={`text-primary transition-all duration-300 ${activeHotspot === 'structure' ? 'opacity-100 stroke-2' : 'opacity-0'}`} />
                 </svg>
+                
+                {/* Hover Instruction */}
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 text-xs font-mono text-muted-foreground bg-background/80 px-3 py-1 rounded-full border border-border/50 backdrop-blur-sm animate-bounce-slow">
+                  <MousePointer2 className="w-3 h-3" />
+                  <span>EXPLORE BLUEPRINT</span>
+                </div>
               </div>
             </div>
           </div>
@@ -129,7 +193,7 @@ export default function Home() {
                   { title: "Information Density", desc: "Clear, concise communication channels that eliminate noise." },
                   { title: "Timeless Design", desc: "Processes that adapt and endure market shifts." }
                 ].map((item, i) => (
-                  <div key={i} className="border border-border p-6 hover:border-primary transition-colors group relative overflow-hidden">
+                  <div key={i} className="draw-trigger border border-border p-6 hover:border-primary transition-colors group relative overflow-hidden opacity-0 translate-y-4 transition-all duration-700 ease-out">
                     <div className="absolute top-0 right-0 p-2 opacity-20 group-hover:opacity-100 transition-opacity">
                       <Ruler className="w-4 h-4 text-primary" />
                     </div>
@@ -164,7 +228,7 @@ export default function Home() {
                 { icon: Ruler, title: "Standardization", desc: "Creating the playbook for consistent, high-quality output." },
                 { icon: Layers, title: "Tech Stack Optimization", desc: "Aligning your tools to work as a cohesive ecosystem." }
               ].map((service, i) => (
-                <div key={i} className="bg-background p-8 hover:bg-accent/10 transition-colors group">
+                <div key={i} className="draw-trigger bg-background p-8 hover:bg-accent/10 transition-colors group opacity-0 translate-y-4 transition-all duration-700 ease-out" style={{ transitionDelay: `${i * 100}ms` }}>
                   <service.icon className="w-8 h-8 text-muted-foreground mb-6 group-hover:text-primary transition-colors" />
                   <h3 className="font-heading text-xl font-bold mb-3">{service.title}</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed">{service.desc}</p>
