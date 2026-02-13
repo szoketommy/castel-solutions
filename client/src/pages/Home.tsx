@@ -29,10 +29,8 @@ export default function Home() {
       {/* Navigation */}
       <header className="fixed top-0 w-full z-50 border-b border-border/50 bg-background/80 backdrop-blur-sm">
         <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 border-2 border-primary flex items-center justify-center">
-              <span className="font-heading font-bold text-lg text-primary">C</span>
-            </div>
+          <div className="flex items-center gap-3">
+            <img src="https://files.manuscdn.com/user_upload_by_module/session_file/116991139/XiSBzPTGKXMZJIKP.jpg" alt="Castel Solutions" className="w-8 h-8" />
             <span className="font-heading font-bold text-xl tracking-tight">CASTEL.SOLUTIONS</span>
           </div>
           
